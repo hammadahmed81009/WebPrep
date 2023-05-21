@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        border: 1px solid #ccc;
+      }
+
+      .container1 {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        height: fit-content;
+        flex-direction: column;
+      }
+
+      .item {
+        background-color: black;
+        flex: 1;
+        padding: 20px;
+        text-align: left;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      .footer {
+        background-color: black;
+      }
+
+      .heading {
+        color: orange;
+        font-weight: bold;
+      }
+      .item1 {
+        color: lightgrey;
+        flex: 1;
+        text-align: left;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        padding-top: 10px;
+      }
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          height: auto;
+        }
+        @keyframes example-animation {
+          0% {
+            opacity: 0;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.5;
+            transform: scale(1.2);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .item {
+          flex: none;
+          margin-bottom: 20px;
+          animation-name: anim;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+        }
+
+        .container1 {
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="footer">
+      <div class="container">
+        <div class="item">
+          <div class="heading">Contact Us</div>
+          <div class="list">
+            <div class="container1">
+              <div class="item1">C1</div>
+              <div class="item1">C2</div>
+              <div class="item1">C3</div>
+              <div class="item1">C4</div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="heading">Contact Us</div>
+          <div class="list">
+            <div class="container1">
+              <div class="item1">C1</div>
+              <div class="item1">C2</div>
+              <div class="item1">C3</div>
+              <div class="item1">C4</div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="heading">Contact Us</div>
+          <div class="list">
+            <div class="container1">
+              <div class="item1">C1</div>
+              <div class="item1">C2</div>
+              <div class="item1">C3</div>
+              <div class="item1">C4</div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="heading">Contact Us</div>
+          <div class="list">
+            <div class="container1">
+              <div class="item1">C1</div>
+              <div class="item1">C2</div>
+              <div class="item1">C3</div>
+              <div class="item1">C4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
