@@ -29,6 +29,21 @@ db.connect(function (err) {
   console.log("Database Connected");
 });
 
+// EJS FILE
+app.get("/users", (req, res) => {
+  const query = "SELECT * FROM `users`"; // Modify the query as per your database schema
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error fetching user data");
+    } else {
+      res.render("users", { users: results });
+    }
+  });
+});
+
+
 app.get("/users", (req, res) => {
   const query = "SELECT * FROM `users`"; // Modify the query as per your database schema
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+    <form action="/authen" method="post">
+        <div class="container">
+            <div class="form-group">
+              <label for=""><b>Enter Code for the Verification sent to your Email</b></label>
+              <input type="text" id="code" name="code" class="form-control" />
+            </div>
+            <input name="verify" type="submit" value="Authenticate" class="btn btn-primary" />
+          </div>
+    </form>
+</body>
+<script>
+  $.ajax({
+    url:"http://localhost:4000/getId",
+    type:"GET",
+    contentType:"application/json",
+    success:(result)=>
+    {
+      sessionStorage.setItem("id",result[0].id)
+      alert(result[0].id);
+    },
+    error:()=>
+    {}
+  });
+
+  var ind=sessionStorage.getItem("id");
+  $.ajax({
+    url:"http://localhost:4000/getCode",
+    type:"GET",
+    contentType:"application/json",
+    data:{
+      id:ind,
+    },
+    success:(result)=>
+    {
+      sessionStorage.clear();
+      alert(result[0].code);
+    },
+    error:()=>
+    {
+      alert(ind);
+    }
+  });
+</script>
+</html>

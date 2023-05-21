@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+
+
+
+          #map { 
+            height: 300px;    
+            width: 600px;            
+          } 
+		  
+input[type=radio] {
+    width: 15px;
+    height: 15px;
+
+}		  
+
+
+
+
+
+
+
+</style>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> FAST | Locaiton API </title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="card " id="mdiv">
+    <div class="card-body">
+		<br/>
+				<input type="hidden" id="lattitude" />
+                <input type="hidden" id="longitude" />
+		<label>Select Location on Map</label>
+		
+		<button type="button" onclick="muSubFun();">Submit</button>
+		<input id="roll-input" style="margin-bottom: 5px" class="form-control" placeholder="Enter Your Roll No">
+          <input id="pac-input" style="margin-bottom: 5px" class="form-control" placeholder="Search your location on Map (Pointer is also movable)">
+<label style="color:red;font-size:12px; display: none;" id="pacinputwarning">This is a Required Field.</label>		  
+		<div class="row">
+		
+		 <div id="map" style="margin-bottom: 10px"></div>
+		</div>
+		<div class="row">		  
+				<input type="hidden" id="lattitude" />
+                <input type="hidden" id="longitude" />
+		</div>
+		<br/>
+		</div>
+<br>
+<!-- END CAPTCHA -->
+		<br/>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+<script>
+let map;
+let latitudeInput;
+let longitudeInput;
+
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+	center: { lat: 0, lng: 0 },
+	zoom: 10
+  });
+
+  latitudeInput = document.getElementById("latitudeInput");
+  longitudeInput = document.getElementById("longitudeInput");
+
+  map.addListener("click", function (event) {
+	const latitude = event.latLng.lat();
+	const longitude = event.latLng.lng();
+
+	latitudeInput.value = latitude;
+	longitudeInput.value = longitude;
+
+	new google.maps.Marker({
+	  map: map,
+	  position: event.latLng
+	});
+  });
+}
+
+function showLocationOnMap() {
+  const latitude = parseFloat(latitudeInput.value);
+  const longitude = parseFloat(longitudeInput.value);
+
+  if (isNaN(latitude) || isNaN(longitude)) {
+	alert("Please enter valid latitude and longitude values.");
+	return;
+  }
+
+  const location = { lat: latitude, lng: longitude };
+  map.setCenter(location);
+
+  new google.maps.Marker({
+	map: map,
+	position: location
+  });
+}
+    </script>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9irjntPHdEJf024h7H_XKpS11OeW1Nh8&libraries=places&callback=initAutocomplete"
+        async defer></script>
+</body>
+</html>

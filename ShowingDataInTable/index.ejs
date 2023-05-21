@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Data Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #333;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    .fetch-button {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>User Data</h1>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(user) { %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.number %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <button class="fetch-button" onclick="fetchUserData()">Fetch Data</button>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    function fetchUserData() {
+      $.ajax({
+        url: "/users",
+        type: "GET",
+        success: function(data) {
+          const tableBody = $("#userTable tbody");
+          tableBody.empty();
+
+          data.forEach(user => {
+            const row = $("<tr>");
+            $("<td>").text(user.name).appendTo(row);
+            $("<td>").text(user.email).appendTo(row);
+            $("<td>").text(user.number).appendTo(row);
+            tableBody.append(row);
+          });
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

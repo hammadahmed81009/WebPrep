@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="/insert" method="post" autocomplete="off">
+    <div class="container">
+      <div class="form-group">
+        <label for=""><b>User Name</b></label>
+        <input type="text" id="name" name="name" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for=""><b>User Email</b></label>
+        <input type="email" id="email" name="email" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for=""><b>User Password</b></label>
+        <input type="password" id="password" name="password" class="form-control" />
+      </div>
+      <!-- <input name="" value="Register" class="btn btn-primary" /> -->
+      <input name="insert" type="submit" value="Register" class="btn btn-primary" />
+      <a href="http://localhost:4000/rend" onclick="ryyyy()" class="btn btn-primary">Go for Authentication</a>
+    </div>
+  </form>
+  <script>
+   function ryyyy()
+    {
+      alert("Hajhsd");
+    }
+  </script>
+</body>
+
+</html>
