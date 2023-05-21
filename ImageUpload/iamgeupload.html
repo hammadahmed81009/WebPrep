@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Upload</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      input[type="file"] {
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .message {
+        margin-top: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Image Upload</h1>
+    <form>
+      <input type="file" name="image" id="iamgefile" accept="image/*" />
+      <button id="btn" onclick="submit1()">Submite</button>
+    </form>
+
+    <button onclick="viewImage()">Image Display</button>
+    <img id="imageDisplay" src="" alt="Image" />
+    <div class="message"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      const form = document.querySelector("form");
+      const message = document.querySelector(".message");
+
+        function submit1() {
+        event.preventDefault();
+        var formData = new FormData();
+        var fileInput = document.getElementById("iamgefile"); // Replace 'imageInput' with the ID of your file input element
+
+        formData.append("image", fileInput.files[0]);
+
+        console.log("error");
+
+        $.ajax({
+          url: "http://localhost:3000/uploadimage",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            alert("Success");
+            console.log("Success");
+          },
+          error: function () {
+            alert("Error");
+          },
+        });
+      };
+
+      function viewImage() {
+        $.ajax({
+        url: "http://localhost:3000/getimage", // Replace with the appropriate URL to fetch the image path from the server
+        type: "GET",
+        success: function (response) {
+          // Assuming the response contains the image path
+          var imagePath = response.imagePath;
+          // Set the src attribute of the image element to display the image
+          $("#imageDisplay").attr("src", imagePath);
+        },
+        error: function () {
+          alert("Error");
+        },
+      });
+      }
+    </script>
+  </body>
+</html>

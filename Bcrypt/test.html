@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div class="box">
+      <div class="form">
+        <div class="header">
+          <h1>GamingZoneX</h1>
+        </div>
+        <h2>Sign Up</h2>
+        <div class="inputbox">
+          <input type="text" required="required" id="username" />
+          <span>Username </span>
+          <i></i>
+        </div>
+
+        <div class="inputbox">
+            <input type="text" required="required" id="email" />
+            <span>Email </span>
+            <i></i>
+          </div>
+
+        <div class="inputbox">
+          <input type="password" required="required" id="password" />
+          <span>Password</span>
+          <i></i>
+        </div>
+
+        <input type="submit" onclick="signup1()" value="Signup" />
+
+        <button onclick="verifyInput()">Verif</button>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function signup1() {
+      var username = $("#username").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+
+      var data = {
+        username1: username,
+        email1: email,
+        password1: password
+      };
+
+      let post = JSON.stringify(data);
+
+      $.ajax({
+        url: "http://localhost:3000/signup",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        type: "POST",
+        contentType: "application/json",
+        data: post,
+        success: function () {
+          alert("Success");
+          //window.location.href = "animation.html";
+        },
+        error: function () {
+          alert("error");
+        },
+      });
+    }
+
+    function verifyInput() {
+      var username = $("#username").val();
+      var password = $("#password").val();
+
+      var formData = { username: username, password: password };
+      let post = JSON.stringify(formData);
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/login",
+        data: post,
+        dataType: "json",
+        encode: true,
+        success: function (data) {
+          if(data.success){
+            alert(data.hashedPassword);
+          } else {
+            alert("Failure");
+          }
+        },
+      });
+    }
+  </script>
+</html>
